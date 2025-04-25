@@ -1,13 +1,14 @@
 import Filter from "@/components/Filter";
 import Sorting from "@/components/Sorting";
 import Table from "@/components/Table";
+import TaskModel from "@/components/TaskModel";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 import { Plus, Search } from "lucide-react";
 
 export default function Home() {
   return (
-    <div className="p-2 md:p-8 ">
+    <div className="p-2 md:p-8 relative">
       <div className="flex justify-between items-center">
         
        
@@ -35,6 +36,7 @@ export default function Home() {
       </div>
       <div className="">
         <Table />
+        <TaskModel/>
       </div>
     </div>
   );
