@@ -1,36 +1,21 @@
 "use client";
 import { Pencil, Trash2 } from "lucide-react";
-import React, { useState } from "react";
+import React from "react";
 import { Task } from "@/lib/types";
 
 
 type PriorityIF = 'low'| 'medium'|'high'
-
-const Table = () => {
-  const [task, setTask] = useState<Task[]>([
-    {
-      id: 1,
-      title: "Lorem ipsum",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna",
-      dueDate: "2024-09-12",
-      status: "completed",
-      priority: "medium",
-    },
-    {
-      id: 2,
-      title: "Lorem ipsum dolor sit amet",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna",
-      dueDate: "2024-09-15",
-      status: "in-progress",
-      priority: "high",
-    },
-  ]);
+interface TableProps {
+  displayed?: Task[];
+}
+const Table = ({displayed=[]}: TableProps) => {
+// const {task, setTask} = useModal()
 
   const PriorityHandler = (id: number, priority:PriorityIF)=>{
 
-   setTask((prev)=> prev.map((item)=> item.id === id ? {...item, priority}: item))
+  if (setTask) {
+    setTask((prev: Task[]) => prev.map((item: Task) => item.id === id ? { ...item, priority } : item));
+  }
   }
 
   return (
@@ -47,7 +32,7 @@ const Table = () => {
           </tr>
         </thead>
         <tbody className="w-full divide-y text-xs">
-          {task.map((item) => (
+          {displayed?.map((item) => (
             <tr key={item.id} className=" text-center align-middle p-12">
               <td className="py-4 ">{item.id}</td>
               <td className="py-4 text-wrap pr-2">{item.title}</td>

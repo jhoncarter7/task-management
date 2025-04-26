@@ -7,16 +7,35 @@ import TaskModel from "@/components/TaskModel";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 import { useModal } from "@/context/myContext";
+import { Task } from "@/lib/types";
 import { Plus, Search } from "lucide-react";
+import { useMemo, useState } from "react";
 
 
 export default function Home() {
+  const {task} = useModal()
 const {edit, openModel, setOpenModel} = useModal()
+const [search, setSearch] = useState<string>('');
+const [filter, setFilter] = useState<string>('');
+const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
+const displayed = useMemo(() => {
+  return task?.filter(t => t.title.toLowerCase().includes(search.toLowerCase()))
+    .filter(t => {
+      if (!filter) return true;
+      return t.priority === filter || t.status === filter;
+    })
+    .sort((a, b) =>
+      sortOrder === 'asc'
+        ? a.title.localeCompare(b.title)
+        : b.title.localeCompare(a.title)
+    );
+}, [task, search, filter, sortOrder]);
+
+console.log("filter", filter)
+
   return (
     <div className="p-2 md:p-8 relative">
       <div className="flex justify-between items-center">
-        
-       
       </div>
       <div className="flex justify-between items-center pb-12">
         <div className=" font-semibold space-y-4 text-center">
@@ -28,19 +47,19 @@ const {edit, openModel, setOpenModel} = useModal()
         </div>
 
         <div className="space-y-4">
-        <Input icon={<Search size={20} />} placeholder="Search" />
+        <Input icon={<Search size={20} />} placeholder="Search" onChange={(e)=>  setSearch(e.target.value)}/>
           <div className="flex justify-between items-center gap-x-4">
           <Button className="bg-primary text-white" icon={<Plus />} onClick={()=> setOpenModel?.(true)}>
             Add Task
           </Button>
 
           <Sorting />
-          <Filter />
+          <Filter  setFilter={setFilter}/>
           </div>
         </div>
       </div>
       <div className="">
-        <Table />
+       { displayed && <Table displayed={displayed as Task[]}/>}
        {edit as boolean || openModel as boolean  && <TaskModel />}
       </div>
     </div>
