@@ -34,11 +34,11 @@ export default function Home() {
   console.log("edit", edit);
 
   return (
-    <div className="p-2 md:p-8 relative">
+    <div className="p-1 md:p-8 relative">
       <div className="flex justify-between items-center"></div>
       <div className="flex justify-between items-center pb-12">
-        <div className=" font-semibold space-y-4 text-center">
-          <div className="border-[1px] rounded-sm flex flex-col  p-2 items-center tracking-widest">
+        <div className="font-medium md:font-semibold space-y-4 text-center">
+          <div className="border-[1px] rounded-sm flex flex-col  p-2 items-center md:tracking-widest">
             Studio137
             <span>LOGO</span>
           </div>

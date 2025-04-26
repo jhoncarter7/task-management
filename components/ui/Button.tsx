@@ -10,7 +10,7 @@ interface buttonIF {
 
 const Button = ({ icon, children, className, onClick, type }: buttonIF) => {
   return (
-    <div className={`py-2 px-4 rounded-sm gap-x-2 flex justify-between items-center cursor-pointer  ${className}`} onClick={onClick} >
+    <div className={`p-1 md:py-2 px-4 rounded-sm gap-x-2 text-xs md:text-sm flex justify-between items-center cursor-pointer  ${className}`} onClick={onClick} >
       <div>{icon}</div>
       <button type={type}>{children}</button>
     </div>

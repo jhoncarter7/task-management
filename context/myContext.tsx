@@ -40,7 +40,7 @@ export const ModalProvider = ({ children }: ModalProviderProps) => {
       id: 2,
       title: "Doing DSA",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna",
+        "learning dsa ",
       dueDate: "2024-09-15",
       status: "in-progress",
       priority: "high",
