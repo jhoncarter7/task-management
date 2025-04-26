@@ -1,9 +1,14 @@
+"use client"
+
 import {  X } from "lucide-react";
 import React from "react";
 import Input from "./ui/Input";
 import Button from "./ui/Button";
+import { useModal } from "@/context/myContext";
 
-const TaskModel = (Edit:boolean) => {
+
+const TaskModel = () => {
+    const {edit, setEdit,  setOpenModel } = useModal()
   return (
     <div>
       <div
@@ -15,7 +20,7 @@ const TaskModel = (Edit:boolean) => {
           <div className=" bg-white md:w-1/3 px-8 p-4 rounded-lg ">
            <div className="flex justify-between items-center pb-4">
             <h1 className="font-semibold text-lg">Add Task</h1>
-            <div className="cursor-pointer "> 
+            <div className="cursor-pointer " onClick={() => (edit ? setEdit?.(false) : setOpenModel?.(false))}> 
             <X/>
             </div>
            </div>
@@ -33,9 +38,9 @@ const TaskModel = (Edit:boolean) => {
             <input type="datetime-local" className="border-2 p-2 text-sm rounded-lg w-full " />
            </div>
            {
-            Edit && <div>
+            edit && <div className="min-w-full">
                 <label htmlFor="">Status</label>
-                <select className="block  lg:w-20 rounded-md border-gray-300 shadow-sm" value="">
+                <select className="block  lg:w-20 rounded-md p-2 border-gray-300 shadow-sm min-w-full" value="">
                   <option value="low">low</option>
                   <option value="medium">medium</option>
                   <option value="high">high</option>
@@ -43,8 +48,8 @@ const TaskModel = (Edit:boolean) => {
             </div>
            }
            <div className="flex justify-between w-full">
-            <Button className="border-[1px] border-primary text-center text-primary">Cancel</Button>
-            <Button className="bg-primary text-white">{Edit ? "Edit Task" :"Add Task"}</Button>
+            <Button className="border-[1px] border-primary text-center text-primary" onClick={() => (edit ? setEdit?.(false) : setOpenModel?.(false))}>Cancel</Button>
+            <Button className="bg-primary text-white">{edit ? "Edit Task" :"Add Task"}</Button>
            </div>
            </form>
           </div>

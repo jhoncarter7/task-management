@@ -1,12 +1,17 @@
+"use client"
+
 import Filter from "@/components/Filter";
 import Sorting from "@/components/Sorting";
 import Table from "@/components/Table";
 import TaskModel from "@/components/TaskModel";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
+import { useModal } from "@/context/myContext";
 import { Plus, Search } from "lucide-react";
 
+
 export default function Home() {
+const {edit, openModel, setOpenModel} = useModal()
   return (
     <div className="p-2 md:p-8 relative">
       <div className="flex justify-between items-center">
@@ -25,7 +30,7 @@ export default function Home() {
         <div className="space-y-4">
         <Input icon={<Search size={20} />} placeholder="Search" />
           <div className="flex justify-between items-center gap-x-4">
-          <Button className="bg-primary text-white" icon={<Plus />}>
+          <Button className="bg-primary text-white" icon={<Plus />} onClick={()=> setOpenModel?.(true)}>
             Add Task
           </Button>
 
@@ -36,7 +41,7 @@ export default function Home() {
       </div>
       <div className="">
         <Table />
-        <TaskModel/>
+       {edit as boolean || openModel as boolean  && <TaskModel />}
       </div>
     </div>
   );
