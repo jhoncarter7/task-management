@@ -17,7 +17,7 @@ export default function Home() {
 const {edit, openModel, setOpenModel} = useModal()
 const [search, setSearch] = useState<string>('');
 const [filter, setFilter] = useState<string>('');
-const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
+const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>("asc");
 const displayed = useMemo(() => {
   return task?.filter(t => t.title.toLowerCase().includes(search.toLowerCase()))
     .filter(t => {
@@ -26,8 +26,8 @@ const displayed = useMemo(() => {
     })
     .sort((a, b) =>
       sortOrder === 'asc'
-        ? a.title.localeCompare(b.title)
-        : b.title.localeCompare(a.title)
+        ? a.dueDate.localeCompare(b.dueDate)
+        : b.dueDate.localeCompare(a.dueDate)
     );
 }, [task, search, filter, sortOrder]);
 
@@ -53,7 +53,7 @@ console.log("filter", filter)
             Add Task
           </Button>
 
-          <Sorting />
+          <Sorting setSortOrder={setSortOrder}/>
           <Filter  setFilter={setFilter}/>
           </div>
         </div>

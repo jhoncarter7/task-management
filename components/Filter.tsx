@@ -29,7 +29,7 @@ const Filter = ({
   const FilterHandler = (e: string) => {
     setFilter(e);
   };
-  console.log(innerWidth);
+
   return (
     <div>
       <div className="flex gapx-2 justify-center items-center ">
