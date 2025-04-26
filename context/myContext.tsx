@@ -10,6 +10,8 @@ interface ModalContextType {
     setOpenModel?: (value: boolean) => void;
     task?: Task[],
     setTask?:  Dispatch<SetStateAction<Task[]>>;
+    editId?: number;
+    setEditId?: (value: number) => void;
   }
   
 const ModalContext = createContext<ModalContextType>({
@@ -22,6 +24,7 @@ interface ModalProviderProps {
 
 export const ModalProvider = ({ children }: ModalProviderProps) => {
   const [edit, setEdit] = useState<boolean>(false);
+  const [editId, setEditId] = useState<number>(0);
   const [openModel, setOpenModel] = useState<boolean>(false);
   const [task, setTask] = useState<Task[]>([
     {
@@ -43,8 +46,9 @@ export const ModalProvider = ({ children }: ModalProviderProps) => {
       priority: "high",
     },
   ]);
+
   return (
-    <ModalContext.Provider value={{ edit, setEdit, openModel, setOpenModel, task, setTask }}>
+    <ModalContext.Provider value={{ edit, setEdit, openModel, setOpenModel, task, setTask, editId, setEditId }}>
       {children}
     </ModalContext.Provider>
   );

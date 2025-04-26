@@ -5,13 +5,14 @@ interface buttonIF {
   children?: string;
   className?: string;
   onClick?: ()=> void;
+  type?: "submit" | "reset" | "button";
 }
 
-const Button = ({ icon, children, className, onClick }: buttonIF) => {
+const Button = ({ icon, children, className, onClick, type }: buttonIF) => {
   return (
-    <div className={`py-2 px-4 rounded-sm gap-x-2 flex justify-between items-center cursor-pointer  ${className}`} onClick={onClick}>
+    <div className={`py-2 px-4 rounded-sm gap-x-2 flex justify-between items-center cursor-pointer  ${className}`} onClick={onClick} >
       <div>{icon}</div>
-      <button>{children}</button>
+      <button type={type}>{children}</button>
     </div>
   );
 };

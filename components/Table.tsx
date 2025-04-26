@@ -2,6 +2,7 @@
 import { Pencil, Trash2 } from "lucide-react";
 import React from "react";
 import { Task } from "@/lib/types";
+import { useModal } from "@/context/myContext";
 
 
 type PriorityIF = 'low'| 'medium'|'high'
@@ -9,7 +10,7 @@ interface TableProps {
   displayed?: Task[];
 }
 const Table = ({displayed=[]}: TableProps) => {
-// const {task, setTask} = useModal()
+const {task, setTask, setEditId, setEdit} = useModal()
 
   const PriorityHandler = (id: number, priority:PriorityIF)=>{
 
@@ -18,6 +19,12 @@ const Table = ({displayed=[]}: TableProps) => {
   }
   }
 
+  const deleteHandler = (id: number) =>{
+    if (setTask) {
+      setTask((prev: Task[]) => prev.filter((item: Task) => item.id !== id));
+    }
+  }
+  console.log("added task", task)
   return (
     <div className="border border-primary p-[2px]  rounded-md">
       <table className="w-full divide-y divide-gray-200 ">
@@ -58,11 +65,15 @@ const Table = ({displayed=[]}: TableProps) => {
                   <option value="high">high</option>
                 </select>
               </td>
-              <td className="px-2 py-4 ">
-                <Pencil size={14} />{" "}
+              <td className="px-2 py-4 cursor-pointer ">
+                <Pencil size={14} onClick={() => {
+                  setEditId?.(item.id);
+                  setEdit?.(true);
+                 
+                }}/>
               </td>
-              <td className="px-2 py-4 ">
-                <Trash2 size={14} />{" "}
+              <td className="px-2 py-4  cursor-pointer">
+                <Trash2 size={14} onClick={()=> deleteHandler(item.id)}/>
               </td>
             </tr>
           ))}

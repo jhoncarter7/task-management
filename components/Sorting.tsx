@@ -12,7 +12,7 @@ const [innerWidth, setInnerWidth] = useState<number>(800)
     setInnerWidth(window.innerWidth)
   },[])
     const SortHandler = (e:  'asc' | 'desc')=>{
-      console.log("sort", e);
+
       setSortOrder(e)
     }
   return (
